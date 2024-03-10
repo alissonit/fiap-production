@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.UUID;
 
 @Repository
-public interface ProductionRepositoryJpa extends MongoRepository<ProductionEntity, UUID> {
+public interface ProductionRepositoryJpa extends MongoRepository<ProductionEntity, String> {
 
 
 }

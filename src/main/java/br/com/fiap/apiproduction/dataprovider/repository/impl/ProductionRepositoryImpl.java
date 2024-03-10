@@ -24,7 +24,7 @@ public class ProductionRepositoryImpl implements ProductionRepository {
     }
 
     @Override
-    public Production getProductionByProductionId(UUID productionId) {
+    public Production getProductionByProductionId(String productionId) {
         return productionRepository.findById(productionId).get().toProduction();
     }
 

@@ -15,7 +15,7 @@ import java.util.UUID;
 public class ProductionEntity {
 
     @Id
-    private UUID productionId;
+    private String productionId;
 
     private String clientCpf;
 
@@ -38,7 +38,7 @@ public class ProductionEntity {
         this.productId = production.getProductId();
     }
 
-    public ProductionEntity(UUID productionId, String clientCpf, UUID orderId, Boolean isPaymentReceived, Double orderPrice, List<UUID> productId) {
+    public ProductionEntity(String productionId, String clientCpf, UUID orderId, Boolean isPaymentReceived, Double orderPrice, List<UUID> productId) {
         this.productionId = productionId;
         this.clientCpf = clientCpf;
         this.orderId = orderId;
@@ -50,7 +50,6 @@ public class ProductionEntity {
 
     public Production toProduction() {
         return new Production(
-                this.productionId,
                 this.clientCpf,
                 this.orderId,
                 this.isPaymentReceived,

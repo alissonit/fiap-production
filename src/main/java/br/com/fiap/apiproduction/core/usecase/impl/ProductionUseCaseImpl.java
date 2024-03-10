@@ -46,7 +46,7 @@ public class ProductionUseCaseImpl implements ProductionUseCase {
     }
 
     @Override
-    public Production getProductionByProductionId(UUID productionId) {
+    public Production getProductionByProductionId(String productionId) {
         return repository.getProductionByProductionId(productionId);
     }
 

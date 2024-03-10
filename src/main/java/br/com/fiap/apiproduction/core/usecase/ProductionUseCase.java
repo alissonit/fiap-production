@@ -10,6 +10,6 @@ public interface ProductionUseCase {
 
     JsonNode getAllOrders();
     void createProduction(Production production);
-    Production getProductionByProductionId(UUID productionId);
+    Production getProductionByProductionId(String productionId);
     List<Production> getAllProductions();
 }

@@ -8,7 +8,7 @@ import java.util.UUID;
 
 public class Production {
 
-    private UUID productionId;
+    private String productionId;
 
     private String clientCpf;
 
@@ -20,8 +20,7 @@ public class Production {
 
     private List<UUID> productId;
 
-    public Production(UUID productionId, String clientCpf, UUID orderId, Boolean isPaymentReceived, Double orderPrice, List<UUID> productId) {
-        this.productionId = productionId;
+    public Production(String clientCpf, UUID orderId, Boolean isPaymentReceived, Double orderPrice, List<UUID> productId) {
         this.clientCpf = clientCpf;
         this.orderId = orderId;
         this.isPaymentReceived = isPaymentReceived;
@@ -33,11 +32,11 @@ public class Production {
 
     }
 
-    public UUID getProductionId() {
+    public String getProductionId() {
         return productionId;
     }
 
-    public void setProductionId(UUID productionId) {
+    public void setProductionId(String productionId) {
         this.productionId = productionId;
     }
 

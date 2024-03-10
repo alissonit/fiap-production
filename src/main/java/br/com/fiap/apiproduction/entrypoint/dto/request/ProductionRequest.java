@@ -8,7 +8,7 @@ import java.util.UUID;
 public record ProductionRequest(String clientCpf, UUID orderId, Boolean isPaymentReceived, Double orderPrice, List<UUID> productId) {
 
     public Production fromRequestProduction() {
-        return new Production(UUID.randomUUID(), clientCpf, orderId, isPaymentReceived, orderPrice, productId);
+        return new Production(clientCpf, orderId, isPaymentReceived, orderPrice, productId);
     }
 
 }

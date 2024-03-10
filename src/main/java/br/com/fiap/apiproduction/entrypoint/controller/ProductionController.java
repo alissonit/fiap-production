@@ -36,7 +36,7 @@ public class ProductionController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProductionResponse> getProductionById(@PathVariable UUID id) {
+    public ResponseEntity<ProductionResponse> getProductionById(@PathVariable String id) {
         return new ResponseEntity<>(
                 ProductionResponse.fromClientResponse(orderUseCase.getProductionByProductionId(id)),
                 HttpStatus.OK);
