@@ -1,7 +1,9 @@
-package br.com.fiap.apiproduction.service.impl;
+package br.com.fiap.apiproduction.core.usecase.impl;
 
-import br.com.fiap.apiproduction.client.OrderClient;
-import br.com.fiap.apiproduction.service.ProductionService;
+import br.com.fiap.apiproduction.core.Production;
+import br.com.fiap.apiproduction.core.dataprovider.repository.ProductionRepository;
+import br.com.fiap.apiproduction.core.usecase.ProductionUseCase;
+import br.com.fiap.apiproduction.entrypoint.client.OrderClient;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -10,11 +12,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.UUID;
+
 @Service
-public class ProductionServiceImpl implements ProductionService {
+public class ProductionUseCaseImpl implements ProductionUseCase {
 
     @Autowired
     private OrderClient ordersClient;
+
+    @Autowired
+    private ProductionRepository repository;
+
     private ObjectMapper objectMapper = new ObjectMapper();
 
     public JsonNode getAllOrders() {
@@ -29,5 +38,20 @@ public class ProductionServiceImpl implements ProductionService {
         }
 
         return objectMapper.nullNode();
+    }
+
+    @Override
+    public void createProduction(Production production) {
+        repository.createProduction(production);
+    }
+
+    @Override
+    public Production getProductionByProductionId(UUID productionId) {
+        return repository.getProductionByProductionId(productionId);
+    }
+
+    @Override
+    public List<Production> getAllProductions() {
+        return repository.getAllProductions();
     }
 }

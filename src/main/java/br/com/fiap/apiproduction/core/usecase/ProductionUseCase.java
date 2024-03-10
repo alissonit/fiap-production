@@ -1,0 +1,15 @@
+package br.com.fiap.apiproduction.core.usecase;
+
+import br.com.fiap.apiproduction.core.Production;
+import com.fasterxml.jackson.databind.JsonNode;
+
+import java.util.List;
+import java.util.UUID;
+
+public interface ProductionUseCase {
+
+    JsonNode getAllOrders();
+    void createProduction(Production production);
+    Production getProductionByProductionId(UUID productionId);
+    List<Production> getAllProductions();
+}
