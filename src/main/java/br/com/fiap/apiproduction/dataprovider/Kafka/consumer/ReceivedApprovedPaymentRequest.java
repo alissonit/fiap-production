@@ -19,10 +19,11 @@ public class ReceivedApprovedPaymentRequest {
     }
 @KafkaListener(topics ="tp-saga-orders",groupId = "orders")
 public void receive(OrderMessage orderMessage){
+    System.out.println("Pedido adicionado a Lista de pedidos1------------------------------------------------------"+orderMessage.getOrderEvent());
     if(OrderEvent.ORDER_STARTED.equals(orderMessage.getOrderEvent())){
         orderUseCase.createProduction(new Production(orderMessage.getClientCpf(),
                 orderMessage.getOrderId(), true, orderMessage.getOrderPrice(), orderMessage.getProductId()) );
-        System.out.println("Pedido adicionado a Lista de pedidos");
+        System.out.println("Pedido adicionado a Lista de pedidos2------------------------------------------------------");
         }
 
 }}

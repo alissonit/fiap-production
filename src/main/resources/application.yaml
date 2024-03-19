@@ -8,7 +8,7 @@ spring:
   data:
     mongodb:
       auto-index-creation: true
-      uri: mongodb://localhost:27017/fiap-production?retryWrites=true&w=majority
+      uri: mongodb://localhost:27017/fiap-production?retryWrites=true&w=majority&createDatabaseIfNotExist=true
   main:
     allow-bean-definition-overriding: true
 
