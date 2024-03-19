@@ -3,7 +3,7 @@ name: Pipeline fiap-production
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   pipeline:
