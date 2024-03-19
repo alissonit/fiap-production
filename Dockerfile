@@ -5,9 +5,8 @@ WORKDIR $HOME
 RUN mkdir -p ${HOME}/target
 COPY src ${HOME}/src
 COPY pom.xml ${HOME}/pom.xml
-COPY target/api-production-0.0.1-SNAPSHOT.jar ${HOME}/target
-#RUN mvn install -DskipTests
-#RUN mvn clean package -DskipTests
+RUN mvn install -DskipTests
+RUN mvn clean package -DskipTests
 FROM amazoncorretto:17-alpine-jdk
 LABEL maintainer="alissoncastroskt@gmail.com"
 ARG APP_VERSION
