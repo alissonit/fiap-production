@@ -2,11 +2,10 @@ FROM maven:3.8.3-openjdk-17 as build
 ENV HOME=/usr/app
 RUN mkdir -p $HOME
 WORKDIR $HOME
-RUN mkdir -p ${HOME}/target
 COPY src ${HOME}/src
 COPY pom.xml ${HOME}/pom.xml
-RUN mvn install -DskipTests
 RUN mvn clean package -DskipTests
+
 FROM amazoncorretto:17-alpine-jdk
 LABEL maintainer="alissoncastroskt@gmail.com"
 ARG APP_VERSION
@@ -15,4 +14,4 @@ ENV APP_HOME="/opt/app"
 WORKDIR ${APP_HOME}
 COPY --from=build /usr/app/target/${JAR_FILE} ${JAR_FILE}
 EXPOSE 8080
-ENTRYPOINT java -jar ${JAR_FILE}
+ENTRYPOINT java -jar ${JAR_FILE} --spring.profiles.active=prod
