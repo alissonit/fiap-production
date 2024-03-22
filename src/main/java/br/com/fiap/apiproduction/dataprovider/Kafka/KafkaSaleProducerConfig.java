@@ -2,8 +2,10 @@ package br.com.fiap.apiproduction.dataprovider.Kafka;
 
 
 import br.com.fiap.apiproduction.dataprovider.Kafka.message.OrderMessage;
+import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.common.serialization.StringSerializer;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.EnableKafka;
@@ -14,23 +16,26 @@ import org.springframework.kafka.core.ProducerFactory;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.apache.kafka.clients.CommonClientConfigs.BOOTSTRAP_SERVERS_CONFIG;
 import static org.apache.kafka.clients.CommonClientConfigs.SECURITY_PROTOCOL_CONFIG;
 import static org.apache.kafka.clients.consumer.ConsumerConfig.*;
 import static org.apache.kafka.common.config.SaslConfigs.SASL_JAAS_CONFIG;
 import static org.apache.kafka.common.config.SaslConfigs.SASL_MECHANISM;
+
 @EnableKafka
 @Configuration
 public class KafkaSaleProducerConfig {
 
-    private static final String CONFLUENT_CLOUD_BOOTSTRAP_SERVERS = "pkc-12576z.us-west2.gcp.confluent.cloud:9092";
-    private static final String CONFLUENT_CLOUD_API_KEY = "KEK7GNAS4BPKFV2H";
-    private static final String CONFLUENT_CLOUD_API_SECRET = "tZoja1y9BL/6J/a+sB9jThULD0fm1VVp/DDURzj2yHPMPvfx0PUL+PASMp9a4xOy";
+    @Value("${spring.kafka.bootstrap-servers}")
+    private String CONFLUENT_CLOUD_BOOTSTRAP_SERVERS_VALUE;
+
+    @Value("${spring.kafka.properties.sasl.jaas.config}")
+    private String SASL_JAAS_CONFIG_VALUE;
+
     @Bean
     public ProducerFactory<String, OrderMessage> producerFactory() {
         Map<String, Object> props = new HashMap<>();
-        props.put(BOOTSTRAP_SERVERS_CONFIG, CONFLUENT_CLOUD_BOOTSTRAP_SERVERS);
-        props.put(SASL_JAAS_CONFIG, "org.apache.kafka.common.security.plain.PlainLoginModule required username=\""+CONFLUENT_CLOUD_API_KEY+"\" password=\""+CONFLUENT_CLOUD_API_SECRET+"\";");
+        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, CONFLUENT_CLOUD_BOOTSTRAP_SERVERS_VALUE);
+        props.put(SASL_JAAS_CONFIG, SASL_JAAS_CONFIG_VALUE);
         props.put(SECURITY_PROTOCOL_CONFIG, "SASL_SSL");
         props.put(SASL_MECHANISM, "PLAIN");
         props.put(KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
